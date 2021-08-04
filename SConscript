@@ -10,6 +10,6 @@ if GetDepend(['PKG_USING_ZB_COORDINATOR']):
     src += Glob('class/mg21/at_device_mg21.c')
 	src += Glob('samples/at_sample_mg21.c')
 
-group = DefineGroup('at_mg21', src, depend = ['PKG_USING_ZB_COORDINATOR'], CPPPATH = path)
+group = DefineGroup('zb_coordinator', src, depend = ['PKG_USING_ZB_COORDINATOR'], CPPPATH = path)
 
 Return('group')
