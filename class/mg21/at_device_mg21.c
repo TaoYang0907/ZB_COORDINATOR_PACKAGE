@@ -136,7 +136,7 @@ static int mg21_pj(struct at_device *device, void *arg)
     }
     else
     {
-        sprintf(cmd, "AT+PJ:%02x,%04x", ((PJReq_t *)arg)->sec, ((PJReq_t *)arg)->nodeId);
+        sprintf(cmd, "AT+PJ:%02x,%04x", ((pj_req_t *)arg)->sec, ((pj_req_t *)arg)->nodeId);
         if (at_obj_exec_cmd(device -> client, resp, (const char *)cmd) != RT_EOK)
         {
             rt_kprintf("AT client send commands failed, response error or timeout !\r\n");
@@ -184,7 +184,7 @@ static int mg21_set_radio_ch(struct at_device *device, void *arg)
 
     char* cmd = rt_malloc(AT_MAX_CMD_LEN);
 
-    if(arg == NULL || ((ChannelReq_t *)arg) -> channel > 26 || ((ChannelReq_t *)arg) -> channel < 11)
+    if(arg == NULL || ((channel_req_t *)arg) -> channel > 26 || ((channel_req_t *)arg) -> channel < 11)
     {
         rt_kprintf("Set Radionch parameter error, please check the parameter !\r\n");
         at_delete_resp(resp);
@@ -193,7 +193,7 @@ static int mg21_set_radio_ch(struct at_device *device, void *arg)
     }
     else
     {
-        sprintf(cmd, "AT+RADIOCH:%d", ((ChannelReq_t *)arg) -> channel);
+        sprintf(cmd, "AT+RADIOCH:%d", ((channel_req_t *)arg) -> channel);
         if (at_obj_exec_cmd(device -> client, resp, (const char *)cmd) != RT_EOK)
         {
             rt_kprintf("AT client send commands failed, response error or timeout !\r\n");
@@ -241,7 +241,7 @@ static int mg21_act_ep_desc(struct at_device *device, void *arg)
 
     char* cmd = rt_malloc(AT_MAX_CMD_LEN);
 
-    sprintf(cmd, "AT+ACTEPDESC:%04x,%04x", ((ActiveEpReq_t *)arg) -> nodeId, ((ActiveEpReq_t *)arg) -> nodeId);
+    sprintf(cmd, "AT+ACTEPDESC:%04x,%04x", ((active_ep_Req_t *)arg) -> nodeId, ((active_ep_Req_t *)arg) -> nodeId);
     if (at_obj_exec_cmd(device -> client, resp, (const char *)cmd) != RT_EOK)
     {
         rt_kprintf("AT client send commands failed, response error or timeout !\r\n");
@@ -289,7 +289,7 @@ static int mg21_simple_desc(struct at_device *device, void *arg)
 
     char* cmd = rt_malloc(AT_MAX_CMD_LEN);
 
-    sprintf(cmd, "AT+SIMPLEDESC:%04x,%04x,%02x", ((SimpleDescReq_t *)arg) -> nodeId, ((SimpleDescReq_t *)arg) -> nodeId, ((SimpleDescReq_t *)arg) -> endpoint);
+    sprintf(cmd, "AT+SIMPLEDESC:%04x,%04x,%02x", ((simple_desc_req_t *)arg) -> nodeId, ((simple_desc_req_t *)arg) -> nodeId, ((simple_desc_req_t *)arg) -> endpoint);
     if (at_obj_exec_cmd(device -> client, resp, (const char *)cmd) != RT_EOK)
     {
         rt_kprintf("AT client send commands failed, response error or timeout !\r\n");
@@ -337,9 +337,9 @@ static int mg21_write_attr(struct at_device *device, void *arg)
 
     char* cmd = rt_malloc(AT_MAX_CMD_LEN);
 
-    sprintf(cmd, "AT+WRITEATTR:%04x,%02x,0,%04x,%04x,%02x,%s", ((WriteAttrsReq_t *)arg) -> nwkAddr, ((WriteAttrsReq_t *)arg) -> endpoint,
-                                                                 ((WriteAttrsReq_t *)arg) -> clusterID, ((WriteAttrsReq_t *)arg) -> attrID,
-                                                                 ((WriteAttrsReq_t *)arg) -> dataType, ((WriteAttrsReq_t *)arg) -> data);
+    sprintf(cmd, "AT+WRITEATTR:%04x,%02x,0,%04x,%04x,%02x,%s", ((write_attrs_req_t *)arg) -> nwkAddr, ((write_attrs_req_t *)arg) -> endpoint,
+                                                               ((write_attrs_req_t *)arg) -> clusterID, ((write_attrs_req_t *)arg) -> attrID,
+                                                               ((write_attrs_req_t *)arg) -> dataType, ((write_attrs_req_t *)arg) -> data);
     if (at_obj_exec_cmd(device -> client, resp, (const char *)cmd) != RT_EOK)
     {
         rt_kprintf("AT client send commands failed, response error or timeout !\r\n");
@@ -387,8 +387,8 @@ static int mg21_read_attr(struct at_device *device, void *arg)
 
     char* cmd = rt_malloc(AT_MAX_CMD_LEN);
 
-    sprintf(cmd, "AT+READATTR:%04x,%02x,0,%04x,%04x", ((ReadAttrsReq_t *)arg) -> nwkAddr, ((ReadAttrsReq_t *)arg) -> endpoint,
-                                                      ((ReadAttrsReq_t *)arg) -> clusterID, ((ReadAttrsReq_t *)arg) -> attrID);
+    sprintf(cmd, "AT+READATTR:%04x,%02x,0,%04x,%04x", ((read_attrs_req_t *)arg) -> nwkAddr, ((read_attrs_req_t *)arg) -> endpoint,
+                                                      ((read_attrs_req_t *)arg) -> clusterID, ((read_attrs_req_t *)arg) -> attrID);
     if (at_obj_exec_cmd(device -> client, resp, (const char *)cmd) != RT_EOK)
     {
         rt_kprintf("AT client send commands failed, response error or timeout !\r\n");
@@ -436,8 +436,8 @@ static int mg21_onoff(struct at_device *device, void *arg)
 
     char* cmd = rt_malloc(AT_MAX_CMD_LEN);
 
-    sprintf(cmd, "AT+ONOFF:%04x,%02x,%d", ((zclOnoffCmd_t *)arg) -> nwkAddr, ((zclOnoffCmd_t *)arg) -> endpoint,
-                                          ((zclOnoffCmd_t *)arg) -> mode);
+    sprintf(cmd, "AT+ONOFF:%04x,%02x,%d", ((zcl_onoff_cmd_t *)arg) -> nwkAddr, ((zcl_onoff_cmd_t *)arg) -> endpoint,
+                                          ((zcl_onoff_cmd_t *)arg) -> mode);
     if (at_obj_exec_cmd(device -> client, resp, (const char *)cmd) != RT_EOK)
     {
         rt_kprintf("AT client send commands failed, response error or timeout !\r\n");
