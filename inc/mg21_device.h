@@ -89,7 +89,7 @@ typedef struct
 // Set Radio Channel Command format
 typedef struct
 {
-  uint         channel;      // Channel number to be set
+  uint8_t         channel;   // Channel number to be set
 } channel_req_t;
 
 // Request Node’s Active Endpoint Command format
@@ -112,7 +112,7 @@ typedef struct
 {
   uint16_t     nwkAddr;      // Network address of interest
   uint8_t      endpoint;     // the endpoint to be discovered
-  uint         sc;           // 0 – means writing to server attributes; 1 – means writing client attributes. Default 0.
+  uint8_t         sc;        // 0 – means writing to server attributes; 1 – means writing client attributes. Default 0.
   uint16_t     mCode;        // 16-bit hexadecimal manufacturer code. Default 0
   uint16_t     clusterID;    // Cluster ID
   uint16_t     attrID;       // Attribute ID
@@ -126,7 +126,7 @@ typedef struct
 {
   uint16_t     nwkAddr;      // Network address of interest
   uint8_t      endpoint;     // the endpoint to be discovered
-  uint         sendMode;     // 0 – unicast, 1 - group addressing
+  uint8_t         sendMode;  // 0 – unicast, 1 - group addressing
   uint16_t     clusterID;    // Cluster ID
   uint16_t     attrID;       // Attribute ID
 } read_attrs_req_t;

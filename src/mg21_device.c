@@ -26,6 +26,7 @@
 #include <string.h>
 
 #include <mg21_device.h>
+#include <rthw.h>
 
 #define DBG_TAG              "at.dev"
 #define DBG_LVL              DBG_INFO
